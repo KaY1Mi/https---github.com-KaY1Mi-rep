@@ -1,0 +1,422 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body>
+    
+    <!-- Главный экран -->
+    <main class="h-screen pt-5 bg-black">
+           <!-- Навигация -->
+      <header  class="container flex items-center justify-between">
+        <a href="{% url 'home' %}" class="uppercase text-[64px] font-NicoMoji text-primary-1 tracking-tight">sakura flow</a>
+        <div class="flex">
+            
+            <button id="menuButton" class="block">
+                <img src="{% static 'images/svg/menu_white.svg' %}" alt="menu" class="w-8 sm:w-10 md:w-12">
+            </button>
+        </div>
+      </header>
+  
+      <!-- Затемнение Экрана -->
+      <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"></div>
+       <!-- Выдвижное меню -->
+<nav id="menu" class="fixed top-0 right-0 h-screen w-full sm:w-full md:w-[650px] bg-white sm:rounded-l-0 md:rounded-l-[50px] z-50 shadow-lg translate-x-full transition-transform duration-700 overflow-hidden">
+    <!-- Кнопка закрытия -->
+    <button id="closeButton" class="absolute top-4 right-4 w-8 h-8 sm:w-10 sm:h-10 md:w-[80px] md:h-[80px] flex items-center justify-center">
+        <img src="{% static 'images/svg/close.svg' %}" alt="Закрыть" class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8">
+    </button>
+
+    <!-- Список -->
+    <ul class="flex flex-col items-center sm:items-center sm:pr-10 md:items-end justify-center lg:pr-10 h-full space-y-8 sm:space-y-10 md:space-y-12">
+        <li>
+            <a href="{% url 'figma_course' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Бесплатный курс
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'all_courses' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Каталог курсов
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'articles' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Статьи о UX/UI дизайне
+            </a>
+        </li>
+    </ul>
+</nav>
+<style>
+    /* Общие стили для меню */
+    #menu {
+    max-width: 100%;
+    padding-right: 20px;
+}
+
+#menu ul {
+    text-align: center;
+}
+
+#menu a {
+    font-size: 2rem; /* Базовый размер для мобильных */
+}
+
+#menu button {
+    width: 60px;
+    height: 60px;
+}
+
+/* Адаптивность */
+@media (min-width: 640px) {
+    #menu {
+        padding-right: 40px;
+    }
+
+    #menu a {
+        font-size: 1rem;
+    }
+
+    #menu button {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (min-width: 768px) {
+    #menu {
+        width: 650px;
+        border-radius: 50px 0 0 50px;
+    }
+
+    #menu ul {
+        text-align: right;
+    }
+
+    #menu a {
+        font-size: 2rem;
+    }
+}
+</style>
+
+           
+      <main>
+        <!-- Секция заголовка -->
+        <div class="container relative py-10">
+            <img 
+                src="{% static 'images/article_img/Btn_Main.jpg' %}" 
+                alt="Color Image" 
+                class="w-full opacity-50 rounded-[50px]"
+            />
+            <h1 class="absolute inset-0 flex items-center justify-center font-Manrope text-white text-[32px] font-medium uppercase 
+            sm:text-[40px] md:text-[64px] lg:text-[96px]">
+            Создаем кнопки
+        </h1>
+        </div>
+    </main>
+    
+    <!-- Секция Контента  -->
+    <section class="bg-white py-10">
+        <div class="container">
+            <!-- Введение -->
+            <div class="max-w-[1400px]">
+                <h2 class="font-Manrope font-medium text-4xl leading-[140%]">В статье вы найдёте 20 приемов, которые применяются в графическом и веб-дизайне в последние годы и могут стать отличным источником вдохновения.</h2>
+    
+                <div class="pt-10">
+                    <p class="font-Manrope font-normal text-[24px] text-black">Сегодня мы обратимся к основам и разберемся:</p>
+                    <ul class="pt-[10px]">
+                        <li class="font-Manrope font-normal text-[24px] text-grey leading-[140%]">- Какие текстовые модели существуют и как их использовать;</li>
+                        <li class="font-Manrope font-normal text-[24px] text-grey leading-[140%]">- Как выбирать, смешивать и сочетать текста в интерфейсе;</li>
+                        <li class="font-Manrope font-normal text-[24px] text-grey leading-[140%]">- Как именовать текста в UI-китах и дизайн-системах и т.д.</li>
+                    </ul>
+                </div>
+    
+                <p class="max-w-[1400px] pt-10 font-Manrope font-normal text-2xl leading-[140%]">Текст — один из главных элементов UI-дизайна. Он может коренным образом изменить <strong>первое впечатление о продукте</strong> — от утонченного и сдержанного до дерзкого и энергичного. Важно не просто подобрать несколько красивых оттенков, а создать продуманную систему. Но давайте начнем с основ.</p>
+    
+            </div>
+    
+            <!-- Контент -->
+            <div class="max-w-[1400px] pt-[100px]">
+                <h2 class="font-Manrope font-medium text-4xl leading-[140%] text-primary-3 uppercase">Как выбирать, смешивать и сочетать текста в UI-дизайне</h2>
+    
+                <div class="pt-5 space-y-3">
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black">Возможно, вы обладаете природным талантом подбирать и смешивать текста. Тогда вам повезло! Но если вы чувствуете себя немного неуверенно, вам пригодятся эти советы.</p>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black">Мы используем цветовой круг RGB, состоящий из 12 цветовых сегментов (первичные, вторичные и третичные цвета). Обычно в дизайнерских программах вы видите круг с мягкими цветовыми переходами, но я разделила его на секции, чтобы упростить нам задачу.</p>
+                </div>
+    
+                <!-- Монохромная -->
+                <div class="pt-[40px]">
+                    <h3 class="font-Manrope font-semibold text-4xl leading-[140%] text-black">Монохромная</h3>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">Выберите цвет, а затем двигайтесь к центру круга, чтобы получить красивый переход. Подобные сочетания выглядят деликатно и изысканно.</p>
+                </div>
+    
+                <!-- Аналоговая -->
+                <div class="pt-[40px]">
+                    <h3 class="font-Manrope font-semibold text-4xl leading-[140%] text-black">Аналоговая</h3>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">При таком подходе мы выбираем цвета, расположенные на цветовом круге рядом друг с другом. Двигайтесь в любую сторону, но старайтесь не выходить за пределы сегмента в 90 градусов. Аналоговая схема выглядит более динамично, но при этом не теряет элегантности.</p>
+                </div>
+    
+                <!-- Комплементарная -->
+                <div class="pt-[40px]">
+                    <h3 class="font-Manrope font-semibold text-4xl leading-[140%] text-black">Комплементарная</h3>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">Решение для тех, кто планирует создать что-то яркое. Начните с выбора базового цвета, а затем добавьте дополнительный с противоположной стороны круга. Если вы хотите сделать палитру еще более динамичной, включите в нее несколько оттенков одного из основных цветов.</p>
+                </div>
+    
+                <!-- Раздельно-комплементарная -->
+                <div class="pt-[40px]">
+                    <h3 class="font-Manrope font-semibold text-4xl leading-[140%] text-black">Раздельно-комплементарная</h3>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">Мы можем пойти еще дальше и добавить к базовому не один, а два дополнительных цвета с противоположной стороны круга. Такая схема называется раздельно-комплементарной.</p>
+                </div>
+    
+                <!-- Оттенки -->
+                <div class="max-w-[1400px] pt-[100px]">
+                    <h2 class="font-Manrope font-medium text-4xl leading-[140%] text-primary-3 uppercase">Поиграйте с оттенками</h2>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">Если вы определились с базовыми цветами, это не значит, что ваша работа окончена. Вы можете поиграть с ними, чтобы получить наиболее удачные оттенки. Главное, не переусердствовать!</p>
+    
+                    <div class="pt-5 space-y-3">
+                        <p class="font-Manrope font-normal text-2xl leading-[140%] text-black"><strong>Hue →</strong> чистый цвет, расположенный на внешней части цветового круга.</p>
+                        <p class="font-Manrope font-normal text-2xl leading-[140%] text-black"><strong>Tint →</strong> оттенок, к которому был добавлен белый цвет.</p>
+                        <p class="font-Manrope font-normal text-2xl leading-[140%] text-black"><strong>Shade →</strong> оттенок, к которому был добавлен черный цвет.</p>
+                        <p class="font-Manrope font-normal text-2xl leading-[140%] text-black"><strong>Tone →</strong> оттенок, к которому был добавлен серый цвет.</p>
+                    </div>
+                </div>
+    
+                <!-- Правильное именование цветов -->
+                <div class="max-w-[1400px] pt-[100px]">
+                    <h2 class="font-Manrope font-medium text-4xl leading-[140%] text-primary-3 uppercase">Правильное именование цветов</h2>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">Как только вы определились с цветами и оттенками, вам нужно <strong>задокументировать их в UI-ките или дизайн-системе.</strong></p>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">Названия должны быть описательными и последовательными, например, серые оттенки можно обозначить как <strong>neutrals </strong>(нейтральные), основной цвет как <strong>primary</strong>, а дополнительный как <strong>secondary</strong>.</p>
+                </div>
+    
+                <!-- Правило 60/30/10 -->
+                <div class="max-w-[1400px] pt-[100px]">
+                    <h2 class="font-Manrope font-medium text-4xl leading-[140%] text-primary-3 uppercase">Правило 60/30/10</h2>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5"><strong>Помимо того, какие цвета вы используете, важно и то, как вы их используете</strong>. Одно из базовых правил, от которых можно отталкиваться, — правило 60/30/10. Оно означает, что <strong>нейтральные (базовые) цвета занимают до 60% вашего дизайна, основной — 30%, а дополнительный (акцентный) — 10%</strong>. Последний чаще всего выбирают для оформления CTA-кнопок.</p>
+                    <p class="font-Manrope font-normal text-2xl leading-[140%] text-black pt-5">Конечно, речь не о математически точных измерениях, а, скорее, об ощущении. Под цветом здесь можно понимать как один цвет, так и цвет + его вариации. Экспериментируйте!</p>
+                </div>
+            </div>
+    
+          <!-- Кнопка на вверх -->
+<section class="pt-[100px]">
+    <div class="flex justify-center">
+        <button id="scrollToTopBtn" class="w-[300px] h-[300px] rounded-full border-4 border-primary-2 font-Manrope font-light text-6xl leading-[140%] text-grey uppercase">
+            наверх
+        </button>
+    </div>
+</section>
+<script>
+    // Получаем кнопку
+    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+    // Добавляем обработчик события
+    scrollToTopBtn.addEventListener("click", function() {
+        // Прокручиваем страницу наверх с плавной анимацией
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+    
+    
+<style>
+    .container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.relative {
+    position: relative;
+}
+
+.py-10 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.text-primary-3 {
+    color: red; /* Замените на нужный цвет */
+}
+
+.font-Manrope {
+    font-family: 'Manrope', sans-serif;
+}
+
+.text-white {
+    color: white;
+}
+
+.text-black {
+    color: black;
+}
+
+.text-grey {
+    color: #808080;
+}
+
+.text-96 {
+    font-size: 96px;
+}
+
+.text-24 {
+    font-size: 24px;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.text-4xl {
+    font-size: 2.25rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-light {
+    font-weight: 300;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.leading-140 {
+    line-height: 1.4;
+}
+
+.pt-10 {
+    padding-top: 10px;
+}
+
+.pt-5 {
+    padding-top: 1.25rem;
+}
+
+.pt-40 {
+    padding-top: 40px;
+}
+
+.pt-100 {
+    padding-top: 100px;
+}
+
+.rounded-50 {
+    border-radius: 50px;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.space-y-3 > * + * {
+    margin-top: 0.75rem;
+}
+
+.border-4 {
+    border-width: 4px;
+}
+
+.w-300 {
+    width: 300px;
+}
+
+.h-300 {
+    height: 300px;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+.text-6xl {
+    font-size: 3.75rem;
+}
+</style>
+            
+
+  <!-- Подвал -->
+  <footer class="bg-white py-10 md:py-16">
+    <div class="container mx-auto">
+        <!-- Верхний блок -->
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-2  md:items-start">
+            <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase  text-black text-center md:text-left mb-4 md:mb-0">
+                г. Владивосток
+            </h3>
+            <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase text-black text-center md:text-left">
+                Sakuraflow@yandex.ru
+            </h3>
+        </div>
+
+        <!-- Логотип -->
+        <div class="flex justify-center py-12">
+            <img src="{%static '/images/svg/footer.svg'%}" alt="Footer_Logo" class="w-auto">
+        </div>
+
+        <!-- Нижний блок -->
+        <div class="flex flex-col md:flex-row justify-between gap-10">
+            <!-- Навигация -->
+            <div class="text-center md:text-left">
+                <h3 class="font-Manrope font-medium text-2xl uppercase text-black mb-4">Навигация</h3>
+                <ol class="space-y-3">
+                    <li>
+                        <a href="{%url 'figma_course'%}" class="font-Manrope font-medium text-[16px] text-grey ">
+                            Бесплатный курс по Figma
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{%url 'all_courses'%}" class="font-Manrope font-medium text-[16px] text-grey ">
+                            Каталог курсов
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{%url 'articles'%}" class="font-Manrope font-medium text-[16px] text-grey ">
+                            Статьи о UX/UI
+                        </a>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Соцсети -->
+            <div class="text-center md:text-left">
+                <h3 class="font-Manrope font-medium text-2xl uppercase text-black mb-4">Соц.сети</h3>
+                <ol class="space-y-3">
+                    <li>
+                        <a href="https://t.me/+-2_3XbsucvMxMTVi" class="font-Manrope font-medium text-[16px] text-grey">
+                            Telegram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://vk.com/club228572416" class="font-Manrope font-medium text-[16px] text-grey">
+                            VK
+                        </a>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Права -->
+            <div class="text-center md:text-left">
+                <h3 class="font-Manrope font-medium text-[16px] uppercase text-black">
+                    © 2024 Все права защищены
+                </h3>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

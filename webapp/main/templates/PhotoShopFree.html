@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <title>{% block title %}Курс по Photoshop - Sakura Flow{% endblock %}</title>
+</head>
+<body>
+     <!-- Навигация -->
+     <header  class="container flex items-center justify-between">
+        <a href="{% url 'home' %}" class="uppercase text-[64px] font-NicoMoji text-primary-1 tracking-tight">sakura flow</a>
+        <div class="flex">
+            
+            <button id="menuButton" class="block">
+                <img src="{% static 'images/svg/menu.svg' %}" alt="menu" class="w-8 sm:w-10 md:w-12">
+            </button>
+        </div>
+      </header>
+  
+      <!-- Затемнение Экрана -->
+      <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"></div>
+      <!-- Выдвижное меню -->
+<nav id="menu" class="fixed top-0 right-0 h-screen w-full sm:w-full md:w-[650px] bg-white sm:rounded-l-0 md:rounded-l-[50px] z-50 shadow-lg translate-x-full transition-transform duration-700 overflow-hidden">
+    <!-- Кнопка закрытия -->
+    <button id="closeButton" class="absolute top-4 right-4 w-8 h-8 sm:w-10 sm:h-10 md:w-[80px] md:h-[80px] flex items-center justify-center">
+        <img src="{% static 'images/svg/close.svg' %}" alt="Закрыть" class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8">
+    </button>
+
+    <!-- Список -->
+    <ul class="flex flex-col items-center sm:items-center sm:pr-10 md:items-end justify-center lg:pr-10 h-full space-y-8 sm:space-y-10 md:space-y-12">
+        <li>
+            <a href="{% url 'Ph_course' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Бесплатный курс
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'all_courses' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Каталог курсов
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'articles' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Статьи о UX/UI дизайне
+            </a>
+        </li>
+    </ul>
+</nav>
+<style>
+    /* Общие стили для меню */
+    #menu {
+    max-width: 100%;
+    padding-right: 20px;
+}
+
+#menu ul {
+    text-align: center;
+}
+
+#menu a {
+    font-size: 2rem; /* Базовый размер для мобильных */
+}
+
+#menu button {
+    width: 60px;
+    height: 60px;
+}
+
+/* Адаптивность */
+@media (min-width: 640px) {
+    #menu {
+        padding-right: 40px;
+    }
+
+    #menu a {
+        font-size: 1rem;
+    }
+
+    #menu button {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (min-width: 768px) {
+    #menu {
+        width: 650px;
+        border-radius: 50px 0 0 50px;
+    }
+
+    #menu ul {
+        text-align: right;
+    }
+
+    #menu a {
+        font-size: 2rem;
+    }
+}
+</style>
+<main>
+    <section class="pt-[70px]">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row lg:justify-between h-full">
+                <!-- Left Section -->
+                <div class="flex flex-col lg:items-start lg:w-1/2 lg:text-left text-center">
+                    <h1 class="font-Manrope text-black text-[40px] md:text-[60px] lg:text-[80px] font-semibold uppercase leading-[50px] md:leading-[70px] lg:leading-[90px] tracking-[-2%]">
+                        Курс по Photoshop
+                    </h1>
+                    <p class="w-full text-left lg:w-[500px] xl:w-[900px] mx-auto lg:mx-0 font-Manrope text-grey text-base md:text-xl lg:text-2xl font-light mt-[20px]">
+                        Курс для начинающих в UX/UI дизайне. Освойте базовые знания работы с графическим редактором.
+                    </p>
+                    <div class="flex-grow"></div> <!-- Заполняет пустое пространство -->
+                    <a href="{% url 'lesson_ps' %}" class="w-full">
+                        <button class="w-full lg:w-[500px] xl:w-[900px] h-[50px] md:h-[60px] lg:h-[73px] font-Manrope font-light uppercase text-lg md:text-xl lg:text-2xl text-white bg-primary-2 rounded-[20px] mt-[20px] mr-[30px]">
+                            начать обучение
+                        </button>
+                    </a>
+                </div>
+                <!-- Right Section -->
+                <div class="hidden lg:block lg:w-1/2">
+                    <img class="w-full max-w-[200px] md:max-w-[300px] lg:max-w-[400px] mx-auto rounded-[20px]" src="{% static 'images/Courses_img/Photoshop.jpg' %}" alt="Figma_Image">
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+    <!-- Секция Программы -->
+    <section class="pt-[70px] ">
+        <div class="container mx-auto px-4">
+            <h2 class="text-grey font-Manrope font-normal uppercase text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">/ ПРОГРАММА ОБУЧЕНИЯ /</h2>
+            <p class="flex text-xl justify-start text-black font-Manrope font-normal pt-[20px] sm:text-2xl sm:justify-end  md:text-3xl lg:text-4xl">
+                Вы научитесь основам UX/UI‑дизайна, изучите<br> продвинутые инструменты Photoshop и сделаете первый<br> самостоятельный проект под присмотром куратора.
+            </p>
+
+            <!-- Карточки Программы -->
+            <div class="flex justify-between flex-wrap py-[40px] space-y-3 lg:py-[70px]">
+                {% for lesson in lessons %}
+                <div class="w-[450px] h-[500px] bg-black rounded-[25px] p-[30px] flex flex-col">
+                    <p class="text-grey font-Manrope font-normal text-2xl">{{ lesson.number }} Урок</p>
+                    <h3 class="text-white font-Manrope font-medium text-3xl pt-[10px]">{{ lesson.title }}</h3>
+                    <div class="pt-[42px] flex justify-center">
+                        <img src="{% static lesson.image %}" alt="{{ lesson.title }}">
+                    </div>
+                    <div class="flex-grow"></div>
+                    <div class="flex space-x-1">
+                        {% for circle in lesson.progress %}
+                        <div class="w-[45px] h-[45px] rounded-full bg-white" style="opacity: {{ circle }}"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Преимущества -->
+    <section class="bg-black">
+        <div class="container mx-auto px-4">
+            <div class="py-[50px] flex flex-col md:flex-col lg:flex-row xl:justify-between xl:py-[100px]">
+                <h2 class="text-grey mb-10 font-Manrope font-normal uppercase  text-3xl lg:text-4xl xl:text-5xl">/ Преимущества /</h2>
+                <div class="flex flex-col space-y-[25px] md:flex-col lg:flex-row lg:space-x-[25px] lg:space-y-0">
+                    {% for advantage in advantages %}
+                    <div class="w-full lg:w-[360px] h-auto lg:h-[360px] bg-{{ advantage.bg_color }} rounded-[10px] shadow-lg">
+                        <div class="px-[20px] py-5">
+                            <div class="flex items-center">
+                                <div class="w-[25px] h-[25px] bg-primary-{{ advantage.icon_color }} rounded-full"></div>
+                                <div class="w-[25px] h-[25px] bg-primary-{{ advantage.secondary_icon_color }} rounded-full -mx-2"></div>
+                            </div>
+                            <h3 class="text-white font-Manrope font-bold uppercase text-2xl py-4">
+                                {{ advantage.title }}
+                            </h3>
+                            <p class="text-primary-4 font-Manrope font-medium text-lg leading-relaxed">
+                                {{ advantage.description }}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Секция Лучшие Работы -->
+<section class="py-[70px]">
+    <div class="container mx-auto px-4">
+        <h2 class="text-grey font-Manrope font-normal uppercase text-3xl lg:text-4xl xl:text-5xl">/ лучшие работы /</h2>
+
+        <!-- Flexbox для горизонтального размещения карточек -->
+        <div class="flex flex-wrap gap-6 py-[40px] md:py-[70px] overflow-x-auto">
+            {% for project in projects %}
+            <div class="p-5 max-w-xs flex-shrink-0">
+                <div class="flex flex-col max-w-full">
+                    <img src="{% static project.image %}" alt="case" class="w-full">
+                    <div class="flex flex-wrap justify-between items-center pt-[20px]">
+                        <h3 class="text-black font-Manrope font-medium uppercase text-2xl sm:text-3xl lg:text-4xl">{{ project.title }}</h3>
+                        <p class="text-black font-Manrope font-normal text-sm sm:text-[16px] lg:text-[18px]">{{ project.author }}</p>
+                    </div>
+                    <p class="text-grey font-Manrope font-normal text-sm sm:text-[16px] lg:text-[18px] pt-[20px]">{{ project.description }}</p>
+                    <a href="{{ project.link }}">
+                        <button class="w-full h-[50px] border-grey border text-grey uppercase font-Manrope font-normal text-sm sm:text-[16px] lg:text-[18px] mt-[30px] hover:border-none hover:bg-primary-2 hover:text-white hover:transition-transform duration-700">
+                            Посмотреть кейс
+                        </button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+
+</main>
+<Style>
+    h1, p {
+  font-size: 1.5rem; /* стандартный размер для маленьких экранов */
+}
+
+/* Увеличиваем текст на больших экранах */
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 2rem; /* размер заголовка на больших экранах */
+  }
+
+  p {
+    font-size: 1.125rem; /* размер параграфа на больших экранах */
+  }
+}
+/* Внешний контейнер */
+.container {
+    max-width: 100%;
+    
+}
+
+
+
+</Style>
+
+    <!-- Подвал + -->
+    <footer class="bg-black py-10 md:py-16">
+        <div class="container mx-auto">
+            <!-- Верхний блок -->
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-2  md:items-start">
+                <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase  text-white text-center md:text-left mb-4 md:mb-0">
+                    г. Владивосток
+                </h3>
+                <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase text-white text-center md:text-left">
+                    Sakuraflow@yandex.ru
+                </h3>
+            </div>
+    
+            <!-- Логотип -->
+            <div class="flex justify-center py-12">
+                <img src="{%static '/images/svg/footer.svg'%}" alt="Footer_Logo" class="w-auto">
+            </div>
+    
+            <!-- Нижний блок -->
+            <div class="flex flex-col md:flex-row justify-between gap-10">
+                <!-- Навигация -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-2xl uppercase text-white mb-4">Навигация</h3>
+                    <ol class="space-y-3">
+                        <li>
+                            <a href="{%url 'Ph_course'%}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Бесплатный курс по Photoshop
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'all_courses' %}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Каталог курсов
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'articles' %}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Статьи о UX/UI
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+    
+                <!-- Соцсети -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-2xl uppercase text-white mb-4">Соц.сети</h3>
+                    <ol class="space-y-3">
+                        <li>
+                            <a href="https://t.me/+-2_3XbsucvMxMTVi" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Telegram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://vk.com/club228572416" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                VK
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+    
+                <!-- Права -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-[16px] uppercase text-white">
+                        © 2024 Все права защищены
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Скрипты -->
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+   @layer base {
+
+    @font-face {
+      font-family: 'Nico Moji';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./src/Fonts/Nico/Nico Moji.ttf') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url('./src/Fonts/Manrope/Manrope-Light.ttf') format('woff2');
+    }
+
+  }
+
+
+  @layer utilities {
+    .corner {
+      @apply absolute border-primary-2 border-4 w-6 h-6;
+    }
+    .top-left {
+      @apply top-0 left-0 border-b-0 border-r-0;
+    }
+    .top-right {
+      @apply top-0 right-0 border-b-0 border-l-0;
+    }
+    .bottom-left {
+      @apply bottom-0 left-0 border-t-0 border-r-0;
+    }
+    .bottom-right {
+      @apply bottom-0 right-0 border-t-0 border-l-0;
+    }
+  }

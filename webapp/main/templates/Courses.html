@@ -1,0 +1,333 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Flow</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-black">
+    <!-- Навигация -->
+    <header  class="container flex items-center justify-between">
+      <a href="{% url 'home' %}" class="uppercase text-[64px] font-NicoMoji text-primary-1 tracking-tight">sakura flow</a>
+      <div class="flex">
+          
+          <button id="menuButton" class="block">
+              <img src="{% static 'images/svg/menu_white.svg' %}" alt="menu" class="w-8 sm:w-10 md:w-12">
+          </button>
+      </div>
+    </header>
+
+    <!-- Затемнение Экрана -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"></div>
+    <!-- Выдвижное меню -->
+<nav id="menu" class="fixed top-0 right-0 h-screen w-full sm:w-full md:w-[650px] bg-white sm:rounded-l-0 md:rounded-l-[50px] z-50 shadow-lg translate-x-full transition-transform duration-700 overflow-hidden">
+    <!-- Кнопка закрытия -->
+    <button id="closeButton" class="absolute top-4 right-4 w-8 h-8 sm:w-10 sm:h-10 md:w-[80px] md:h-[80px] flex items-center justify-center">
+        <img src="{% static 'images/svg/close.svg' %}" alt="Закрыть" class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8">
+    </button>
+
+    <!-- Список -->
+    <ul class="flex flex-col items-center sm:items-center sm:pr-10 md:items-end justify-center lg:pr-10 h-full space-y-8 sm:space-y-10 md:space-y-12">
+        <li>
+            <a href="{% url 'figma_course' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Бесплатный курс
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'all_courses' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Каталог курсов
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'articles' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Статьи о UX/UI дизайне
+            </a>
+        </li>
+    </ul>
+</nav>
+<style>
+    /* Общие стили для меню */
+    #menu {
+    max-width: 100%;
+    padding-right: 20px;
+}
+
+#menu ul {
+    text-align: center;
+}
+
+#menu a {
+    font-size: 2rem; /* Базовый размер для мобильных */
+}
+
+#menu button {
+    width: 60px;
+    height: 60px;
+}
+
+/* Адаптивность */
+@media (min-width: 640px) {
+    #menu {
+        padding-right: 40px;
+    }
+
+    #menu a {
+        font-size: 1rem;
+    }
+
+    #menu button {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (min-width: 768px) {
+    #menu {
+        width: 650px;
+        border-radius: 50px 0 0 50px;
+    }
+
+    #menu ul {
+        text-align: right;
+    }
+
+    #menu a {
+        font-size: 2rem;
+    }
+}
+</style>
+
+ <style>
+.main {
+    padding: 40px 20px;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+h2 {
+    color: #5a5a5a;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    padding-top: 70px;
+    text-align: center;
+}
+.catalog-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Уменьшено расстояние между карточками */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Оставляем возможность переноса */
+}
+.card {
+    max-width: 445px;
+    max-height: 515px;
+    position: relative;
+    opacity: 1;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+.card img {
+    border-radius: 15px;
+    width: 100%;
+    height: auto;
+}
+.card:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    align-items: center;
+}
+.card-text {
+    color: #fff;
+}
+.card-text h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+.card-text p {
+    font-size: 1rem;
+    color: #b0b0b0;
+}
+.arrow-btn {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ffbdf4;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease, border 0.5s ease;
+}
+.arrow-btn:hover {
+    background-color: #ffbdf4;
+    border: none;
+}
+.arrow-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .catalog-container {
+        justify-content: center;
+    }
+}
+@media (max-width: 768px) {
+    .catalog-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        max-width: 90%;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+}
+</style>
+<div class="main">
+    <div class="container">
+        <h2>/ Каталог курсов /</h2>
+
+        <div class="catalog-container">
+
+            <div class="card">
+                <img src="{% static 'images/Courses_img/figma.jpg' %}" alt="Figma_Image">
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>Figma free</h3>
+                        <p>Базовый курс по Figma для начинающих</p>
+                    </div>
+                    <a href="{% url 'figma_course' %}" class="arrow-btn">
+                        <img src="{% static 'images/svg/arrow.svg' %}" alt="arrow">
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="{% static 'images/Courses_img/Ae.jpg' %}" alt="Ae_Image">
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>After Effects free</h3>
+                        <p>Базовый курс по After Effects для начинающих</p>
+                    </div>
+                    <a href="{% url 'ae_course' %}" class="arrow-btn">
+                        <img src="{% static 'images/svg/arrow.svg' %}" alt="arrow">
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="{% static 'images/Courses_img/Photoshop.jpg' %}" alt="Photoshop_Image">
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>Photoshop free</h3>
+                        <p>Базовый курс по Photoshop для начинающих</p>
+                    </div>
+                    <a href="{% url 'Ph_course' %}" class="arrow-btn">
+                        <img src="{% static 'images/svg/arrow.svg' %}" alt="arrow">
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="{% static 'images/Courses_img/tilda.jpg' %}" alt="Tilda_Image">
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>Tilda free</h3>
+                        <p>Базовый курс по Tilda для начинающих</p>
+                    </div>
+                    <a href="{% url 'tilda_course' %}" class="arrow-btn">
+                        <img src="{% static 'images/svg/arrow.svg' %}" alt="arrow">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+
+     <!-- Подвал + -->
+     <footer class="bg-black py-10 md:py-16">
+        <div class="container mx-auto">
+            <!-- Верхний блок -->
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-2  md:items-start">
+                <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase  text-white text-center md:text-left mb-4 md:mb-0">
+                    г. Владивосток
+                </h3>
+                <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase text-white text-center md:text-left">
+                    Sakuraflow@yandex.ru
+                </h3>
+            </div>
+    
+            <!-- Логотип -->
+            <div class="flex justify-center py-12">
+                <img src="{%static '/images/svg/footer.svg'%}" alt="Footer_Logo" class="w-auto">
+            </div>
+    
+            <!-- Нижний блок -->
+            <div class="flex flex-col md:flex-row justify-between gap-10">
+                <!-- Навигация -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-2xl uppercase text-white mb-4">Навигация</h3>
+                    <ol class="space-y-3">
+                        <li>
+                            <a href="{%url 'figma_course'%}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Бесплатный курс по Figma
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'all_courses' %}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Каталог курсов
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'articles' %}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Статьи о UX/UI
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+    
+                <!-- Соцсети -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-2xl uppercase text-white mb-4">Соц.сети</h3>
+                    <ol class="space-y-3">
+                        <li>
+                            <a href="https://t.me/+-2_3XbsucvMxMTVi" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Telegram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://vk.com/club228572416" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                VK
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+    
+                <!-- Права -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-[16px] uppercase text-white">
+                        © 2024 Все права защищены
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

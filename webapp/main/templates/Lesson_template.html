@@ -1,0 +1,9 @@
+<!-- Урок -->
+{% extends 'Lesson1.html' %}
+{% block content %}
+    <div class="lesson-content">
+        <h1>{{ lesson.title }}</h1>
+        <div>{{ lesson.content|safe }}</div>
+        <iframe width="1840" height="780" src="{{ lesson.video_url }}" title="Video player" allowfullscreen></iframe>
+    </div>
+{% endblock %}

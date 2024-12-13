@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <title>Figma-Lesson 1</title>
+</head>
+<body class="bg-black">
+
+   <!-- Навигация -->
+   <header  class="container flex items-center justify-between">
+    <a href="{% url 'home' %}" class="uppercase text-[64px] font-NicoMoji text-primary-1 tracking-tight">sakura flow</a>
+    <div class="flex">
+        
+        <button id="menuButton" class="block">
+            <img src="{% static 'images/svg/menu_white.svg' %}" alt="menu" class="w-8 sm:w-10 md:w-12">
+        </button>
+    </div>
+  </header>
+
+  <!-- Затемнение Экрана -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"></div>
+   <!-- Выдвижное меню -->
+<nav id="menu" class="fixed top-0 right-0 h-screen w-full sm:w-full md:w-[650px] bg-white sm:rounded-l-0 md:rounded-l-[50px] z-50 shadow-lg translate-x-full transition-transform duration-700 overflow-hidden">
+    <!-- Кнопка закрытия -->
+    <button id="closeButton" class="absolute top-4 right-4 w-8 h-8 sm:w-10 sm:h-10 md:w-[80px] md:h-[80px] flex items-center justify-center">
+        <img src="{% static 'images/svg/close.svg' %}" alt="Закрыть" class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8">
+    </button>
+
+    <!-- Список -->
+    <ul class="flex flex-col items-center sm:items-center sm:pr-10 md:items-end justify-center lg:pr-10 h-full space-y-8 sm:space-y-10 md:space-y-12">
+        <li>
+            <a href="{% url 'figma_course' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Бесплатный курс
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'all_courses' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Каталог курсов
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'articles' %}" class="font-Manrope font-normal text-2xl sm:text-4xl md:text-4xl uppercase text-grey transition-transform duration-700 hover:underline hover:underline-offset-8 hover:text-black">
+                Статьи о UX/UI дизайне
+            </a>
+        </li>
+    </ul>
+</nav>
+<style>
+    /* Общие стили для меню */
+    #menu {
+    max-width: 100%;
+    padding-right: 20px;
+}
+
+#menu ul {
+    text-align: center;
+}
+
+#menu a {
+    font-size: 2rem; /* Базовый размер для мобильных */
+}
+
+#menu button {
+    width: 60px;
+    height: 60px;
+}
+
+/* Адаптивность */
+@media (min-width: 640px) {
+    #menu {
+        padding-right: 40px;
+    }
+
+    #menu a {
+        font-size: 1rem;
+    }
+
+    #menu button {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (min-width: 768px) {
+    #menu {
+        width: 650px;
+        border-radius: 50px 0 0 50px;
+    }
+
+    #menu ul {
+        text-align: right;
+    }
+
+    #menu a {
+        font-size: 2rem;
+    }
+}
+</style>
+    <!-- Главный экран -->
+    <main>
+        <div class="container">
+            <img class="pt-[50px]"  src="{% static 'images/Courses_img/AfterEffects_Main.png' %}" alt="">
+        </div>
+    </main>
+
+    <!-- Секция Введения -->
+    <section>
+        <div class="container">
+            <div class="flex flex-col">
+                <div class="flex justify-between py-5 border-b-2 border-grey">
+                    <p class="font-Manrope font-medium text-2xl text-white">Определение</p>
+                    <p class="max-w-[920px] font-Manrope font-normal text-2xl text-grey">Adobe After Effects — это мощное программное обеспечение для создания визуальных эффектов, графической анимации и композитинга, используемое в кино, телевидении и видеопроизводстве..</p>
+                </div>
+
+                <div class="flex justify-between py-5 border-b-2 border-grey">
+                    <p class="font-Manrope font-medium text-2xl text-white">Назначение</p>
+                    <p class="max-w-[920px] font-Manrope font-normal text-2xl text-grey">Adobe After Effects используется для создания визуальных эффектов, анимации и композитинга в видео и фильмах. Он позволяет добавлять спецэффекты, настраивать графическую анимацию и объединять различные элементы, чтобы создавать профессиональный и кинематографический видеоконтент.</p>
+                </div>
+
+                <div class="flex justify-between py-5 border-b-2 border-grey">
+                    <p class="font-Manrope font-medium text-2xl text-white">С помощью графического редактора  AfterEffects можно</p>
+                    <ul class="max-w-[920px] list-disc list-outside space-y-3">
+                        <li class="font-Manrope font-normal text-2xl text-grey">Создание 2D и 3D анимаций;</li>
+                        <li class="font-Manrope font-normal text-2xl text-grey">Применение визуальных эффектов, таких как размытие, цветокоррекция, освещение и многие другие;</li>
+                        <li class="font-Manrope font-normal text-2xl text-grey">Композитинг, то есть объединение множества медиаэлементов (видео, изображений, текста) в единый кадр;</li>
+                        <li class="font-Manrope font-normal text-2xl text-grey">Работа с трекингом (отслеживанием движения) для наложения эффектов на движущиеся объекты.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Видеоурока -->
+    <section class="py-[70px]">
+        <div class="container">
+            <h2 class="text-grey font-Manrope font-normal uppercase text-5xl ">/ Видео-Урок /</h2>
+            <div class="aspect-w-16 aspect-h-9 my-10">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/actddUcUnCM?si=7d0yQJGviUG-j9H-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>            </div>
+            <a href="{% url 'lesson_ae' %}"><button class="w-full h-[80px] bg-primary-2 text-white uppercase font-Manrope text-2xl font-light rounded-[20px]">пеРЕЙТИ к уроку 2</button></a>
+        </div>
+    </section>
+
+        
+    <!-- Подвал + -->
+    <footer class="bg-black py-10 md:py-16">
+        <div class="container mx-auto">
+            <!-- Верхний блок -->
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-2  md:items-start">
+                <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase  text-white text-center md:text-left mb-4 md:mb-0">
+                    г. Владивосток
+                </h3>
+                <h3 class="font-Manrope font-medium text-xl md:text-[32px] uppercase text-white text-center md:text-left">
+                    Sakuraflow@yandex.ru
+                </h3>
+            </div>
+    
+            <!-- Логотип -->
+            <div class="flex justify-center py-12">
+                <img src="{%static '/images/svg/footer.svg'%}" alt="Footer_Logo" class="w-auto">
+            </div>
+    
+            <!-- Нижний блок -->
+            <div class="flex flex-col md:flex-row justify-between gap-10">
+                <!-- Навигация -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-2xl uppercase text-white mb-4">Навигация</h3>
+                    <ol class="space-y-3">
+                        <li>
+                            <a href="{%url 'figma_course'%}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Бесплатный курс по Figma
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'all_courses' %}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Каталог курсов
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{%url 'articles' %}" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Статьи о UX/UI
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+    
+                <!-- Соцсети -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-2xl uppercase text-white mb-4">Соц.сети</h3>
+                    <ol class="space-y-3">
+                        <li>
+                            <a href="https://t.me/+-2_3XbsucvMxMTVi" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                Telegram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://vk.com/club228572416" class="font-Manrope font-medium text-[16px] text-grey hover:text-white">
+                                VK
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+    
+                <!-- Права -->
+                <div class="text-center md:text-left">
+                    <h3 class="font-Manrope font-medium text-[16px] uppercase text-white">
+                        © 2024 Все права защищены
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
